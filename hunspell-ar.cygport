@@ -1,0 +1,31 @@
+NAME="hunspell-ar"
+VERSION=3.5
+RELEASE=1
+CATEGORY="Text"
+SUMMARY="Arabic dictionary for Hunspell"
+DESCRIPTION="Hunspell is a spell checker and morphological analyzer library and
+program designed for languages with rich morphology and complex compounding or
+character encoding.
+This package provides a Arabic dictionary for Hunspell."
+HOMEPAGE="http://ayaspell.sourceforge.net/"
+SRC_URI="mirror://sourceforge/ayaspell/hunspell-ar_${VERSION}.2014-11-08.zip"
+SRC_DIR=.
+
+ARCH=noarch
+
+src_compile() { :; }
+
+src_install() {
+	cd ${S}
+	insinto /usr/share/myspell
+	newins ar.aff ar_TN.aff
+	newins ar.dic ar_TN.dic
+
+	for l in ar_AE ar_BH ar_DJ ar_DZ ar_EG ar_ER ar_IL ar_IN ar_IQ ar_JO \
+		 ar_KM ar_KW ar_LB ar_LY ar_MA ar_MR ar_OM ar_PS ar_QA ar_SA \
+		 ar_SD ar_SO ar_SY ar_TD ar_YE
+	do
+		dosym ar_TN.aff /usr/share/myspell/$l.aff
+		dosym ar_TN.dic /usr/share/myspell/$l.dic
+	done
+}
